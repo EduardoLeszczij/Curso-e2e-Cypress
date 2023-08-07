@@ -40,24 +40,24 @@ Cypress.Commands.add('fillSignupFormAndSubmit', (email, password) => {
     const confirmationCode = message.html.body.match(/\d{6}/)[0]
     cy.get('#confirmationCode').type(`${confirmationCode}{enter}`)
     cy.wait('@getNotes')
-    })
+  })
 })
 
 
 Cypress.Commands.add('guiLogin', (
   username = Cypress.env('USER_EMAIL'),
   password = Cypress.env('USER_PASSWORD')
-  ) => {
+) => {
   cy.intercept('GET', '**/notes').as('getNotes')
   cy.visit('/login')
   cy.get('#email').type(username)
-  cy.get('#password').type(password, { log: false });
+  cy.get('#password').type(password, { log: false })
   cy.contains('button', 'Login').click()
   cy.wait(500)
   cy.wait('@getNotes')
-  cy.contains('h1', 'Your Notes').should('be.visible');
+  cy.contains('h1', 'Your Notes').should('be.visible')
 })
-  
+
 Cypress.Commands.add('sessionLogin', (
   username = Cypress.env('USER_EMAIL'),
   password = Cypress.env('USER_PASSWORD')
@@ -77,12 +77,12 @@ Cypress.Commands.add('createNote', (note, attachFile = false) => {
 
   if (attachFile) {
     attachFileHandler()
-  };
+  }
 
   cy.contains('button', 'Create').click()
 
   cy.contains('.list-group-item', note).should('be.visible')
-});
+})
 
 Cypress.Commands.add('editNote', (note, newNoteValue, attachFile = false) => {
   cy.intercept('GET', '**/notes/**').as('getNote')
@@ -92,13 +92,13 @@ Cypress.Commands.add('editNote', (note, newNoteValue, attachFile = false) => {
 
   cy.get('#content')
     .as('contentField')
-    .clear();
+    .clear()
   cy.get('@contentField')
     .type(newNoteValue)
 
   if (attachFile) {
     attachFileHandler()
-  };
+  }
 
   cy.contains('button', 'Save').click()
 
@@ -130,9 +130,9 @@ Cypress.Commands.add('fillSettingsFormAndSubmit', () => {
     .type('1271')
   cy.get('@iframe')
     .find('[name="cvc"]')
-    .type('123');
+    .type('123')
   cy.get('@iframe')
     .find('[name="postal"]')
-    .type('12345');
+    .type('12345')
   cy.contains('button', 'Purchase').click()
 })
