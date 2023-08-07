@@ -1,4 +1,4 @@
-const { defineConfig } = require('cypress');
+const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
 	chromeWebSecurity: false,
@@ -7,9 +7,7 @@ module.exports = defineConfig({
 		defaultCommandTimeout: 15000,
 		env: {
 			viewportWidthBreakpoint: 768,
-		},		  
-		setupNodeEvents(on, config) {
-			// implement node event listeners here
 		},
 	},
-});
+	projectId: "ybquv7"
+})
