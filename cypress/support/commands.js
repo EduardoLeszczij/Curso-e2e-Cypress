@@ -53,7 +53,6 @@ Cypress.Commands.add('guiLogin', (
   cy.get('#email').type(username)
   cy.get('#password').type(password, { log: false })
   cy.contains('button', 'Login').click()
-  cy.wait(500)
   cy.wait('@getNotes')
   cy.contains('h1', 'Your Notes').should('be.visible')
 })
